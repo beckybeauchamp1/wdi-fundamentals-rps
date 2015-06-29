@@ -21,44 +21,35 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-function getPlayerMove(move) { 
-    if (move === null){ 
-    	return "move";
-    }
-    else {
-    	return "getInput()";
-    }
+function getPlayerMove(move) {
+        return move || getInput();
 }
+
 function getComputerMove(move) {
-    if (move === null){
-    	return "move";
-    }
-    else{
-    	return "randomPlay";
-    }
+    	return move || randomPlay();
 }
 
 function getWinner(playerMove,computerMove) {
     var winner;
-    if (playerMove === computerMove){
+    if (playerMove === computerMove) {
         winner = "tie";
     }
-    else if (playerMove === "rock" && computerMove === "paper"){
+    else if (playerMove === "rock" && computerMove === "paper") {
         winner = "player";
     }
-    else if (playerMove === "rock" && computerMove === "scissors"){
+    else if (playerMove === "rock" && computerMove === "scissors") {
         winner = "computer";
     }
-    else if (playerMove === "paper" && computerMove === "rock"){
+    else if (playerMove === "paper" && computerMove === "rock") {
         winner = "player";
     }
-    else if (playerMove === "paper" && computerMove === "scissors"){
+    else if (playerMove === "paper" && computerMove === "scissors") {
         winner = "computer";
     }
-    else if(playerMove === "scissors" && computerMove === "paper"){
+    else if(playerMove === "scissors" && computerMove === "paper") {
         winner = "player";
     }
-    else if (playerMove === "scissors" && computerMove === "rock"){
+    else {
         winner = "computer";
     }
     return winner;
@@ -68,16 +59,24 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    while (playerWins <= 5 || computerWins <= 5){
-    	if (getWinner === "player"){
-    		return playerWins++; 
-    }
-    	else{
-    		return computerWins++;
-    }
-    }
-    console.log("Player chose" + playerMove + "While Computer chose" + computerMove);
-    console.log("The Score is player" + playerWins + "To computer" + computerWins);
+    while (playerWins < 5 && computerWins < 5){
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove();
+        var winner = getWinner(playerMove, computerMove);
+        if (winner === "player"){
+            console.log("Player Wins!");
+            playerWins += 1;
+        }
+        else if (winner === "computer"){
+            console.log("Computer Wins!");
+            computerWins += 1;
+        }
+        else {
+            console.log ("It's a tie!");
+        }
+        console.log("Player score is" + " " + playerWins + " " + "While the Computer score is" + " " + computerWins);
+    } 
     return [playerWins, computerWins];
 }
 
+playToFive();
