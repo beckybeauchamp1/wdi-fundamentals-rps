@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////
 /*   Provided Code - Please Don't Edit   */
 ////////////////////////////////////////////////
-'use strict';
+//'use strict';
 
 function getInput() {
     console.log("Please choose either 'rock', 'paper', or 'scissors'.")
@@ -26,7 +26,7 @@ function getPlayerMove(move) {
 }
 
 function getComputerMove(move) {
-    	return move || randomPlay();
+        return move || randomPlay();
 }
 
 function getWinner(playerMove,computerMove) {
@@ -35,22 +35,32 @@ function getWinner(playerMove,computerMove) {
         winner = "tie";
     }
     else if (playerMove === "rock" && computerMove === "paper") {
-        winner = "player";
+        console.log("You chose rock and the computer chose paper");
+        winner = "computer";
+        
     }
     else if (playerMove === "rock" && computerMove === "scissors") {
-        winner = "computer";
+        console.log("You chose rock and the computer chose scissors");
+        winner = "player";
     }
     else if (playerMove === "paper" && computerMove === "rock") {
+        console.log("You chose paper and the computer chose rock");
         winner = "player";
     }
     else if (playerMove === "paper" && computerMove === "scissors") {
+        console.log("You chose paper and the computer chose scissors");
         winner = "computer";
     }
     else if(playerMove === "scissors" && computerMove === "paper") {
+        console.log("You chose scissors and the computer chose paper");
         winner = "player";
     }
-    else {
+    else if (playerMove === "scissors" && computerMove === "rock") {
+        console.log("You chose scissors and the computer chose rock");
         winner = "computer";
+    }
+    else if (playerMove !== "paper" || playerMove !== "rock"){
+        console.log("Not valid!");
     }
     return winner;
 }
@@ -65,18 +75,33 @@ function playToFive() {
         var winner = getWinner(playerMove, computerMove);
         if (winner === "player"){
             console.log("Player Wins!");
-            playerWins += 1;
+            playerWins ++;
+            console.log("Player score is" + " " + playerWins + " " + "While the Computer score is" + " " + computerWins);
         }
         else if (winner === "computer"){
             console.log("Computer Wins!");
-            computerWins += 1;
+            computerWins ++;
+            console.log("Player score is" + " " + playerWins + " " + "While the Computer score is" + " " + computerWins);
+        }
+        else if (playerMove === computerMove) {
+            console.log ("It's a tie!");
+            continue;
         }
         else {
-            console.log ("It's a tie!");
+            continue;
         }
-        console.log("Player score is" + " " + playerWins + " " + "While the Computer score is" + " " + computerWins);
     } 
+    if (playerWins === 5){
+        console.log("You win!");
+    }
+    else if (computerWins === 5){
+        console.log("Sorry, you lose!");
+    }
     return [playerWins, computerWins];
 }
 
 playToFive();
+
+
+
+
